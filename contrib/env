@@ -1,0 +1,14 @@
+DEBUG=True
+SECRET_KEY=
+ALLOWED_HOSTS=127.0.0.1, localhost
+
+# facebook social oauth2
+# developers.facebook.com
+SOCIAL_AUTH_FACEBOOK_KEY = ''
+SOCIAL_AUTH_FACEBOOK_SECRET = ''
+
+# Google Oauth2
+# console.developers.google.com 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE=
