@@ -2,35 +2,40 @@
 
 {% block content %}
 
-    <div class="container">
+<div class="container mt-2">
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col-md-4 offset-md-4">
-                <form class="shadow-sm p-2 rounded">
+        <div class="col-md-4 offset-md-4">
+            <form class="shadow-sm p-2 rounded" method="post">
+                {% csrf_token %}
+                <legend class="text-center">Identifique-se</legend>
+                <div class="dropdown-divider"></div>
+                
+                <div class="form-group">
+                    <label for="{{form.username.id_for_label}}">Username</label>
+                    <input type="text" name="{{form.username.name}}" class="form-control form-control-sm" id="{{form.username.id_for_label}}" aria-describedby="{{form.username.name}}">
+                    <small id="{{form.username.name}}" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="{{form.password.id_for_label}}">Password</label>
+                    <input type="password" name="{{form.password.name}}" class="form-control form-control-sm" id="{{form.password.id_for_label}}">
+                </div>
 
-                    <div class="dropdown-divider"></div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-            </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-sm btn-primary">Sign in</button>
+                </div>
 
+                <hr class="pb-1 shadow-sm">
+
+                <div class="form-group text-center">
+                    <p><a class="btn-sm btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br></p>
+                    <p><a class="btn-sm btn-primary" href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br></p>
+                </div>
+
+            </form>
         </div>
 
-
-
-        
-
     </div>
-
-    
-
+</div>
 {% endblock content %}
