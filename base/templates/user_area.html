@@ -13,16 +13,18 @@
                       <a class="nav-link" href="{% url 'base:user-area' %}">Home</a>
                     </li>
                     <li class="nav-item">
+                      <a class="nav-link" href="{% url 'todo:todo' %}">ToDo</a>
+                    </li>
+                    <li class="nav-item">
                       <a class="nav-link" href="{% url 'accounts:logout' %}" tabindex="-1" aria-disabled="true">Logout</a>
                     </li>
                   </ul>
             </div>
 
-
+            {% block user_area %}
+            {% endblock %}
 
         </div>
-
-
     </div>
 
 

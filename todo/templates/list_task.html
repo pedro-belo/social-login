@@ -1,0 +1,70 @@
+<div class="col-12 bg-info">
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <h4 class="text-center">Adicionado</h4>
+            <ul class="list-group m-2">
+                {% for item in todo %}
+                {% if item.stage == item.ADICIONADO %}
+                <li class="list-group-item">{{item.task}}
+
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.PROGRESSO %}"
+                            class="btn-sm btn-secondary">&#10097;</a>
+                    </div>
+
+                </li>
+                {% endif %}
+                {%empty%}
+                <li>Sem tarefas registradas</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <h4 class="text-center">Em progresso</h4>
+            <ul class="list-group m-2">
+                {% for item in todo %}
+                {% if item.stage == item.PROGRESSO %}
+                <li class="list-group-item">{{item.task}}
+
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.ADICIONADO %}"
+                            class="btn-sm btn-secondary">&#10096;</a>
+                        <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.CONCLUIDO %}"
+                            class="btn-sm btn-secondary">&#10097;</a>
+                    </div>
+
+                </li>
+                {% endif %}
+                {%empty%}
+                <li>Sem tarefas registradas</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <h4 class="text-center">Finalizado</h4>
+            <ul class="list-group m-2">
+                {% for item in todo %}
+                {% if item.stage == item.CONCLUIDO %}
+                <li class="list-group-item">{{item.task}}
+
+                    <div class="btn-group text-white" role="group" aria-label="Basic example">
+                        <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.PROGRESSO %}"
+                            class="btn-sm btn-secondary">&#10096;</a>
+                        <a href="{% url 'todo:delete' task_id=item.pk %}" class="btn-sm btn-danger">&#10005;</a>
+                    </div>
+
+                </li>
+                {% endif %}
+                {%empty%}
+                <li>Sem tarefas registradas</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+</div>
