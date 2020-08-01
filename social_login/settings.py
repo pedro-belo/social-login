@@ -130,7 +130,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'base:index'
+LOGIN_REDIRECT_URL = 'base:user-area'
+LOGOUT_REDIRECT_URL = 'accounts:login'
 
 # Facebook
 SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
