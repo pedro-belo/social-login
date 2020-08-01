@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework',
     'rest_framework_social_oauth2',
-    'base'
+    'base', 'accounts'
 ]
 
 MIDDLEWARE = [
@@ -130,7 +130,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'base:index'
+LOGIN_REDIRECT_URL = 'base:user-area'
+LOGOUT_REDIRECT_URL = 'accounts:login'
 
 # Facebook
 SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')

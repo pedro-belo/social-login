@@ -1,0 +1,29 @@
+{% extends 'base/index.html' %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'base:user-area' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'accounts:logout' %}" tabindex="-1" aria-disabled="true">Logout</a>
+                    </li>
+                  </ul>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+{% endblock content %}
