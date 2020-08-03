@@ -24,10 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'oauth2_provider',
     'social_django',
     'rest_framework',
-    'rest_framework_social_oauth2',
     'base', 'accounts', 'todo'
 ]
 
@@ -48,9 +46,6 @@ AUTHENTICATION_BACKENDS = (
 
     # Facebook
     'social_core.backends.facebook.FacebookOAuth2',
-
-    # DRF
-    'rest_framework_social_oauth2.backends.DjangoOAuth2',
 
     # Django
     'django.contrib.auth.backends.ModelBackend',
@@ -144,11 +139,3 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 # Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE', cast=Csv())
-
-# Configurações DRF
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication', 
-        'rest_framework_social_oauth2.authentication.SocialAuthentication',
-    ),
-}

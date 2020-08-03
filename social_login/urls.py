@@ -8,6 +8,6 @@ urlpatterns = [
     path('', include(base_urls, namespace='base')),
     path('accounts/', include(accounts_urls, namespace='accounts')),
     path('todo/', include(todo_urls, namespace='todo')),
-    path('auth/', include('rest_framework_social_oauth2.urls')),
+    path('auth/', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),
 ]

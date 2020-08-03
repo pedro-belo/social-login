@@ -3,6 +3,7 @@ from todo.models import ToDo
 from todo.forms import TodoForm
 from django.contrib.auth.decorators import login_required
 
+
 def todo(request):
     todo = ToDo.objects.order_by('stage', 'task').filter(user=request.user)
     return render(request, 'todo.html', context={'todo': todo, 'form': TodoForm()})
