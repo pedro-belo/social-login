@@ -15,9 +15,15 @@
                     <li class="nav-item">
                       <a class="nav-link" href="{% url 'todo:todo' %}">ToDo</a>
                     </li>
+
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'accounts:logout' %}" tabindex="-1" aria-disabled="true">Logout</a>
+                      <a class="nav-link" href="{% url 'account:settings' %}" tabindex="-1" aria-disabled="true">Settings</a>
                     </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'account:logout' %}" tabindex="-1" aria-disabled="true">Logout</a>
+                    </li>
+
                   </ul>
             </div>
 

@@ -24,9 +24,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'account',
     'social_django',
     'rest_framework',
-    'base', 'accounts', 'todo'
+    'base',
+    'todo'
 ]
 
 MIDDLEWARE = [
@@ -40,7 +42,6 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-
     # Google
     'social_core.backends.google.GoogleOAuth2',
 
@@ -126,12 +127,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'base:user-area'
-LOGOUT_REDIRECT_URL = 'accounts:login'
+LOGOUT_REDIRECT_URL = 'account:login'
 
 # Facebook
 SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')
-
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 # Google configuration
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
@@ -139,3 +140,25 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 # Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE', cast=Csv())
+
+
+# Pipeline autenticação
+SOCIAL_AUTH_DISCONNECT_PIPELINE = (
+
+    # Caso o usuário não tenha senha, envio para o form 'create-password'
+    'account.pipeline.check_password',
+
+    # Verifies that the social association can be disconnected from the current
+    # user (ensure that the user login mechanism is not compromised by this
+    # disconnection).
+    'social_core.pipeline.disconnect.allowed_to_disconnect',
+
+    # Collects the social associations to disconnect.
+    'social_core.pipeline.disconnect.get_entries',
+
+    # Revoke any access_token when possible.
+    'social_core.pipeline.disconnect.revoke_tokens',
+
+    # Removes the social associations.
+    'social_core.pipeline.disconnect.disconnect',
+)

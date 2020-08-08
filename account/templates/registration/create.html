@@ -1,0 +1,76 @@
+{% extends 'base/index.html' %}
+
+{% block content %}
+
+<div class="container mt-2">
+
+    <!-- <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Oky</button>
+    </form> -->
+
+    <div class="row">
+
+        <div class="col-md-4 offset-md-4">
+            <form class="shadow-sm p-2 rounded" method="post">
+                {% csrf_token %}
+                <legend class="text-center">Tela de cadastro</legend>
+              <div class="dropdown-divider"></div>
+                <div class="form-group">
+                    <label for="{{form.username.id_for_label}}">Username</label>
+                    <input type="text" name="{{form.username.name}}" class="form-control form-control-sm" id="{{form.username.id_for_label}}" aria-describedby="{{form.username.name}}" value="{% if form.username.value %}{{form.username.value}} {% endif %}">
+                    {% for error in form.username.errors %}
+                    <small id="{{form.username.name}}_error" class="form-text text-danger">{{error}}</small>
+                    {% empty%}
+                    <small id="{{form.username.name}}_help" class="form-text text-muted">{{form.username.help_text}}</small>
+                    {% endfor %}
+                    
+                </div>
+                <div class="form-group">
+                    <label for="{{form.password1.id_for_label}}">Password</label>
+                    <input type="password" name="{{form.password1.name}}" class="form-control form-control-sm" id="{{form.password1.id_for_label}}">
+                    {% for error in form.password1.errors %}
+                    <small id="{{form.password1.name}}_error" class="form-text text-danger">{{error}}</small>
+                    {% empty %}
+                    <small id="{{form.password1.name}}_help" class="form-text text-muted">{{form.password1.help_text}}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{form.password2.id_for_label}}">Repeat password</label>
+                    <input type="password" name="{{form.password2.name}}" class="form-control form-control-sm" id="{{form.password2.id_for_label}}">
+                    {% for error in form.password2.errors %}
+                    <small id="{{form.password2.name}}_error" class="form-text text-danger">{{error}}</small>
+                    {% empty %}
+                    <small id="{{form.password2.name}}_help" class="form-text text-muted">{{form.password2.help_text}}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{form.email.id_for_label}}">E-Mail</label>
+                    <input type="email" name="{{form.email.name}}" class="form-control form-control-sm" id="{{form.email.id_for_label}}" value="{% if form.email.value %}{{form.email.value}} {% endif %}">
+                    {% for error in form.email.errors %}
+                    <small id="{{form.email.name}}_error" class="form-text text-danger">{{error}}</small>
+                    {% empty %}
+                    <small id="{{form.email.name}}" class="form-text text-muted">{{form.email.help_text}}</small>
+                    {% endfor %}
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn-sm btn-primary">Sign in</button>
+                </div>
+
+                <hr class="pb-1 shadow-sm">
+
+                <div class="form-group text-center">
+                    <p><a class="btn-sm btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">Login com Google</a><br></p>
+                    <p><a class="btn-sm btn-primary" href="{% url 'social:begin' 'facebook' %}">Login com Facebook</a><br></p>
+                </div>
+
+            </form>
+        </div> 
+
+    </div>
+</div>
+{% endblock content %}
