@@ -7,11 +7,16 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def todo(request):
     todo = ToDo.objects.order_by('stage', 'task').filter(user=request.user)
-    return render(request, 'todo.html', context={'todo': todo, 'form': TodoForm()})
+
+    context = {'todo': todo, 'form': TodoForm()}
+    template_name = 'todo.html'
+
+    return render(request, template_name, context=context)
+
 
 @login_required
 def addTodo(request):
-    
+
     if request.method == 'POST':
         todoForm = TodoForm(request.POST)
         if todoForm.is_valid():
@@ -30,6 +35,7 @@ def change_stage(request, task_id, new_stage):
     task.stage = new_stage
     task.save()
     return redirect('todo:todo')
+
 
 @login_required
 def delete_task(request, task_id):

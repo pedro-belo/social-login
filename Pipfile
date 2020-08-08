@@ -5,7 +5,9 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
-pytest = "*"
+flake8 = "*"
+autopep8 = "*"
+pytest-django = "*"
 
 [packages]
 django = "*"

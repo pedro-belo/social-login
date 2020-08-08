@@ -1,7 +1,7 @@
+from decouple import config, Csv
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-from decouple import config, Csv
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -123,33 +123,43 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 
-
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'base:user-area'
 LOGOUT_REDIRECT_URL = 'account:login'
 
 # Facebook
-SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
-SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')
+SOCIAL_AUTH_FACEBOOK_KEY = config(
+    'SOCIAL_AUTH_FACEBOOK_KEY')
+
+SOCIAL_AUTH_FACEBOOK_SECRET = config(
+    'SOCIAL_AUTH_FACEBOOK_SECRET')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 # Google configuration
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config(
+    'SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 
-# Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE', cast=Csv())
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config(
+    'SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+
+# Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to
+# get extra permissions from Google.
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = config(
+    'SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE', cast=Csv())
 
 
 # Pipeline autenticação
 SOCIAL_AUTH_DISCONNECT_PIPELINE = (
 
-    # Caso o usuário não tenha senha, envio para o form 'create-password'
+    # Caso o usuário não tenha senha,
+    # envie-o para o form 'create-password'
     'account.pipeline.check_password',
 
-    # Verifies that the social association can be disconnected from the current
-    # user (ensure that the user login mechanism is not compromised by this
+    # Verifies that the social association
+    # can be disconnected from the current
+    # user (ensure that the user login mechanism
+    # is not compromised by this
     # disconnection).
     'social_core.pipeline.disconnect.allowed_to_disconnect',
 

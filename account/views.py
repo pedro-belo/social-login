@@ -1,11 +1,13 @@
-from django.core.exceptions import PermissionDenied
-from django.views.generic.base import View
-from django.shortcuts import render, redirect
-from account.forms import UserCreationForm, CreatePassword
-from django.contrib.auth.decorators import login_required
-from social_django.models import UserSocialAuth
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect, render
+from django.views.generic.base import View
+from social_django.models import UserSocialAuth
+
+from account.forms import CreatePassword, UserCreationForm
+
 
 class CreatePasswordView(LoginRequiredMixin, View):
 
@@ -18,7 +20,9 @@ class CreatePasswordView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         self.is_allowed(request)
-        return render(request, self.template_name, context={'form': self.Form()})
+        return render(request,
+                      self.template_name,
+                      context={'form': self.Form()})
 
     def post(self, request, *args, **kwargs):
         self.is_allowed(request)
@@ -26,28 +30,39 @@ class CreatePasswordView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, request.user)
-            return render(request, self.template_name, context={'change': True})
+            return render(request,
+                          self.template_name,
+                          context={'change': True})
 
         return render(request, self.template_name, context={'form': form})
 
+
 class UserCreationView(View):
-    
+
     template_name = 'registration/create.html'
     Form = UserCreationForm
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, context={'form': self.Form()})
+        return render(request,
+                      self.template_name,
+                      context={'form': self.Form()})
 
     def post(self, request, *args, **kwargs):
-    
+
         form = self.Form(request.POST)
         if form.is_valid():
             form.save()
             return redirect('account:login')
-            
+
         return render(request, self.template_name, context={'form': form})
+
 
 @login_required
 def settings(request):
+
+    template_name = 'account/settings.html'
+
     social_accounts = UserSocialAuth.objects.filter(user=request.user)
-    return render(request, 'account/settings.html', context={'social_accounts': social_accounts})
+    context = {'social_accounts': social_accounts}
+
+    return render(request, template_name, context=context)
