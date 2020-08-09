@@ -4,16 +4,10 @@
 
 <div class="container mt-2">
 
-    <!-- <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Oky</button>
-    </form> -->
-
     <div class="row">
 
-        <div class="col-md-4 offset-md-4">
-            <form class="shadow-sm p-2 rounded" method="post">
+        <div class="col-md-4 offset-md-4 bg-white bg-white shadow-sm rounded">
+            <form class="p-2" method="post">
                 {% csrf_token %}
                 <legend class="text-center">Tela de cadastro</legend>
               <div class="dropdown-divider"></div>
@@ -59,13 +53,6 @@
                 
                 <div class="form-group">
                     <button type="submit" class="btn-sm btn-primary">Sign in</button>
-                </div>
-
-                <hr class="pb-1 shadow-sm">
-
-                <div class="form-group text-center">
-                    <p><a class="btn-sm btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">Login com Google</a><br></p>
-                    <p><a class="btn-sm btn-primary" href="{% url 'social:begin' 'facebook' %}">Login com Facebook</a><br></p>
                 </div>
 
             </form>

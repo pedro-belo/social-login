@@ -1,66 +1,102 @@
-<div class="col-12 bg-info">
+<div class="col-12" style="background-color: #2FDAA7;">
 
-    <div class="row">
+    <div class="row" style="color: #283044;">
 
-        <div class="col-md-4">
-            <h4 class="text-center">Adicionado</h4>
+        <div class="col-md-4 border border-light">
+            
+            <h4 class="text-center py-2">Adicionado</h4>
+            
+            <hr class="shadow-lg pb-1 my-0 bg-white">
+
             <ul class="list-group m-2">
                 {% for item in todo %}
                 {% if item.stage == item.ADICIONADO %}
-                <li class="list-group-item">{{item.task}}
+                <li class="list-group-item px-0">
 
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.PROGRESSO %}"
-                            class="btn-sm btn-secondary">&#10097;</a>
+                    <div class="row m-0">
+
+                        <div class="col-md-10">{{item.task}}</div>
+                        
+                        <div class="col-md-2">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.PROGRESSO %}"
+                                    class="btn-sm btn-secondary">&#10097;</a>
+                            </div>
+                        </div>
+
                     </div>
-
+                    
                 </li>
                 {% endif %}
                 {%empty%}
-                <li>Sem tarefas registradas</li>
+                <li class="list-group-item text-center text-secondary">Nenhuma tarefa adicionada</li>
                 {% endfor %}
             </ul>
         </div>
 
-        <div class="col-md-4">
-            <h4 class="text-center">Em progresso</h4>
+        <div class="col-md-4 border border-light">
+            <h4 class="text-center py-2">Progresso</h4>
+
+            <hr class="shadow-lg pb-1 my-0 bg-white">
+
             <ul class="list-group m-2">
                 {% for item in todo %}
                 {% if item.stage == item.PROGRESSO %}
-                <li class="list-group-item">{{item.task}}
+                <li class="list-group-item">
 
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.ADICIONADO %}"
-                            class="btn-sm btn-secondary">&#10096;</a>
-                        <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.CONCLUIDO %}"
-                            class="btn-sm btn-secondary">&#10097;</a>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.ADICIONADO %}"
+                                    class="btn-sm btn-secondary">&#10096;</a>
+                            </div>
+                        </div>
+                        <div class="col-md-8">{{item.task}}</div>
+                        <div class="col-md-2">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.CONCLUIDO %}"
+                                    class="btn-sm btn-secondary">&#10097;</a>
+                            </div>
+                        </div>
                     </div>
 
                 </li>
                 {% endif %}
                 {%empty%}
-                <li>Sem tarefas registradas</li>
+                <li class="list-group-item text-center text-secondary">Nenhuma tarefa em progresso</li>
                 {% endfor %}
             </ul>
         </div>
 
-        <div class="col-md-4">
-            <h4 class="text-center">Finalizado</h4>
+        <div class="col-md-4 border border-light">
+            <h4 class="text-center py-2">Finalizado</h4>
+
+            <hr class="shadow-lg pb-1 my-0 bg-white">
+
             <ul class="list-group m-2">
                 {% for item in todo %}
                 {% if item.stage == item.CONCLUIDO %}
-                <li class="list-group-item">{{item.task}}
+                <li class="list-group-item">
 
-                    <div class="btn-group text-white" role="group" aria-label="Basic example">
-                        <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.PROGRESSO %}"
-                            class="btn-sm btn-secondary">&#10096;</a>
-                        <a href="{% url 'todo:delete' task_id=item.pk %}" class="btn-sm btn-danger">&#10005;</a>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="btn-group text-white" role="group" aria-label="Basic example">
+                                <a href="{% url 'todo:stage' task_id=item.pk new_stage=item.PROGRESSO %}"
+                                    class="btn-sm btn-secondary">&#10096;</a>
+                            </div>
+                        </div>
+                        <div class="col-md-8">{{item.task}}</div>
+                        <div class="col-md-2">
+                            <div class="btn-group text-white" role="group" aria-label="Basic example">
+                                <a href="{% url 'todo:delete' task_id=item.pk %}" class="btn-sm btn-danger">&#10005;</a>
+                            </div>
+                        </div>
                     </div>
 
                 </li>
                 {% endif %}
                 {%empty%}
-                <li>Sem tarefas registradas</li>
+                <li class="list-group-item text-center text-secondary">Nenhuma tarefa concluida</li>
                 {% endfor %}
             </ul>
         </div>

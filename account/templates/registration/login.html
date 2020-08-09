@@ -6,8 +6,8 @@
 
     <div class="row">
 
-        <div class="col-md-4 offset-md-4">
-            <form class="shadow-sm p-2 rounded" method="post">
+        <div class="col-md-4 offset-md-4 bg-white shadow-sm rounded">
+            <form class="p-2" method="post">
                 {% csrf_token %}
                 <legend class="text-center">Identifique-se</legend>
                 <div class="dropdown-divider"></div>
@@ -35,9 +35,14 @@
 
                 <hr class="pb-1 shadow-sm">
 
+                <div class="form-group text-center mb-0">
+                    <a href="{% url 'social:begin' 'facebook' %}" class="btn bg-light shadow-sm py-2 rounded" style="color: #283044;border: 2px solid #d0ccee;display:block;">
+                        <i class="fab fa-facebook-f p-0"></i>acebook</a>
+                </div>
+
                 <div class="form-group text-center">
-                    <p><a class="btn-sm btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">Login com Google</a><br></p>
-                    <p><a class="btn-sm btn-primary" href="{% url 'social:begin' 'facebook' %}">Login com Facebook</a><br></p>
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn bg-light shadow-sm py-2 rounded" style="color: #283044;border: 2px solid #d0ccee;display:block;">
+                        <i class="fab fa-google p-0"></i>oogle</a>
                 </div>
 
             </form>
